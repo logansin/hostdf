@@ -1,0 +1,153 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%; /* White */
+    --foreground: 217 70% 22%; /* Dark Blue (for text) */
+
+    --card: 0 0% 100%; /* White */
+    --card-foreground: 217 70% 22%; /* Dark Blue */
+
+    --popover: 0 0% 100%; /* White */
+    --popover-foreground: 217 70% 22%; /* Dark Blue */
+
+    --primary: 217 100% 33%; /* Flag Blue (e.g. #0039A6) */
+    --primary-foreground: 0 0% 100%; /* White */
+
+    --secondary: 217 100% 90%; /* Light Blue */
+    --secondary-foreground: 217 100% 33%; /* Flag Blue */
+
+    --muted: 220 30% 96%; /* Very Light Gray/Blue-ish White */
+    --muted-foreground: 217 30% 50%; /* Muted Blue-Gray */
+
+    --accent: 4 79% 52%; /* Flag Red (e.g. #D52B1E) */
+    --accent-foreground: 0 0% 100%; /* White */
+
+    --destructive: 4 79% 52%; /* Flag Red for destructive actions */
+    --destructive-foreground: 0 0% 100%; /* White */
+
+    --border: 217 100% 80%; /* Light Blue Border */
+    --input: 0 0% 100%; /* White input background */
+    --ring: 217 100% 33%; /* Flag Blue for focus rings */
+
+    --chart-1: 217 100% 45%; /* Variations of blue and red for charts */
+    --chart-2: 4 79% 60%;
+    --chart-3: 217 80% 65%;
+    --chart-4: 4 60% 70%;
+    --chart-5: 210 50% 50%; /* A more neutral gray-blue */
+    --radius: 0.5rem;
+
+    /* Sidebar colors - adjusted to fit the Russian flag theme */
+    --sidebar-background: 217 100% 28%; /* Darker shade of Flag Blue */
+    --sidebar-foreground: 0 0% 95%; /* Off-White/Light Gray for text */
+    --sidebar-primary: 0 0% 100%; /* White for active/selected items */
+    --sidebar-primary-foreground: 217 100% 28%; /* Dark Blue text on white active items */
+    --sidebar-accent: 4 79% 58%; /* Slightly brighter Flag Red for accents */
+    --sidebar-accent-foreground: 0 0% 100%; /* White */
+    --sidebar-border: 217 100% 20%; /* Even Darker Blue for borders */
+    --sidebar-ring: 4 79% 58%; /* Flag Red for focus rings in sidebar */
+  }
+
+  .dark {
+    --background: 217 70% 12%; /* Very Dark Blue */
+    --foreground: 0 0% 95%; /* Light Gray / Off-White */
+
+    --card: 217 70% 15%; /* Dark Blue */
+    --card-foreground: 0 0% 95%; /* Light Gray / Off-White */
+
+    --popover: 217 70% 10%; /* Very Dark Popover Blue */
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 217 100% 60%; /* Lighter Flag Blue for dark mode */
+    --primary-foreground: 217 70% 12%; /* Dark blue text on light blue primary */
+
+    --secondary: 217 50% 25%; /* Muted Dark Blue */
+    --secondary-foreground: 0 0% 90%; /* Lighter Gray */
+
+    --muted: 217 40% 20%; /* Dark Muted Blue */
+    --muted-foreground: 210 30% 70%; /* Muted Light Blue-Gray */
+
+    --accent: 4 80% 65%; /* Lighter Flag Red */
+    --accent-foreground: 0 0% 100%; /* White */
+
+    --destructive: 4 70% 60%; /* Lighter Flag Red for destructive */
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 217 50% 30%; /* Medium Dark Blue Border */
+    --input: 217 60% 18%; /* Darker Blue for input */
+    --ring: 217 100% 60%; /* Lighter Flag Blue for focus rings */
+
+    --chart-1: 217 100% 60%;
+    --chart-2: 4 80% 65%;
+    --chart-3: 217 80% 70%;
+    --chart-4: 4 70% 75%;
+    --chart-5: 210 40% 60%;
+
+    /* Sidebar colors for dark theme */
+    --sidebar-background: 217 80% 10%; /* Very Dark Blue, slightly distinct */
+    --sidebar-foreground: 0 0% 90%; /* Light Gray */
+    --sidebar-primary: 217 100% 65%; /* Bright Blue for active items */
+    --sidebar-primary-foreground: 217 80% 10%; /* Dark text for active items */
+    --sidebar-accent: 4 80% 70%; /* Bright Red for accents */
+    --sidebar-accent-foreground: 0 0% 100%; /* White */
+    --sidebar-border: 217 80% 15%; /* Darker border */
+    --sidebar-ring: 4 80% 70%; /* Bright Red for focus */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply text-foreground;
+    /* Fallback background color, can be adjusted if needed */
+    background-color: hsl(var(--background)); 
+  }
+  /* Remove fixed background from body, it's handled by DynamicBackground */
+}
+
+@layer utilities {
+  .text-neon-title {
+    color: #FFFFFF; /* Forcing white for the base text for neon effect */
+    /* text-shadow for blueish neon effect, using --primary for adaptive glow */
+    text-shadow:
+      0 0 5px #FFFFFF, /* Inner white diffusion */
+      0 0 10px #FFFFFF,
+      0 0 15px hsl(var(--primary)), /* Outer blue glow */
+      0 0 20px hsl(var(--primary)),
+      0 0 25px hsl(var(--primary));
+  }
+
+  .icon-neon-red {
+    /* --accent is red. This class adds the glow. Base color comes from text-accent. */
+    filter: drop-shadow(0 0 3px hsl(var(--accent)))
+            drop-shadow(0 0 7px hsl(var(--accent)))
+            drop-shadow(0 0 12px hsl(var(--accent)));
+  }
+
+  .animate-neon-blink {
+    animation: neon-blink-animation 1.2s infinite linear;
+  }
+
+  @keyframes neon-blink-animation {
+    0%, 100% { opacity: 1; }
+    10% { opacity: 0.3; }
+    15% { opacity: 0.8; }
+    20% { opacity: 0.25; }
+    25% { opacity: 0.7; }
+    30% { opacity: 0.2; }
+    35% { opacity: 0.6; }
+    40% { opacity: 0.1; }
+    45% { opacity: 0.5; }
+    50% { opacity: 0.15; }
+    55% { opacity: 1; }
+    60% { opacity: 0.4; }
+    70% { opacity: 0.9; }
+    80% { opacity: 0.3; }
+    90% { opacity: 1; }
+  }
+}
